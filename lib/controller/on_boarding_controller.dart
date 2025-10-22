@@ -1,27 +1,27 @@
+import 'package:aplication_news/controller/app_started_controller.dart';
+import 'package:aplication_news/models/on_boarding_info.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:news_app/controller/app_started_controller.dart';
-import 'package:news_app/models/on_boarding_info.dart';
 
 class OnBoardingController extends GetxController {
   final List<OnBoardingInfo> onBoardingData = [
     OnBoardingInfo(
-      image: "assets/onboarding1.png",
+      image: "assets/images/on-boarding/1n.png",
       title: "Curated Just For You",
       description:
-          "Get the stories that matter most. We learn your interests and deliver a personalized news feed, so you're always in the know.",
+          "Get the stories that matter most, we leave your interact and deliver a personalized news feed, so you're always in the know.",
     ),
     OnBoardingInfo(
-      image: "assets/onboarding2.png",
-      title: "Stay Ahead of the Headlines",
+      image: "assets/images/on-boarding/2n.png",
+      title: "Curated Just For You",
       description:
-          "Be the first to know with real-time alerts for breaking news and major events. Never miss an important update.",
+          "Get the stories that matter most, we leave your interact and deliver a personalized news feed, so you're always in the know.",
     ),
     OnBoardingInfo(
-      image: "assets/onboarding3.png",
-      title: "Explore Topics You Love",
+      image: "assets/images/on-boarding/3n.png",
+      title: "Curated Just For You",
       description:
-          "From technology and sports to politics and entertainment, follow the topics that interest you and discover new sources.",
+          "Get the stories that matter most, we leave your interact and deliver a personalized news feed, so you're always in the know.",
     ),
   ];
   final RxInt _currentPageIndex = 0.obs;
@@ -34,19 +34,12 @@ class OnBoardingController extends GetxController {
     pageController = PageController();
   }
 
-  @override
-  void onClose() {
-    pageController.dispose();
-    super.onClose();
-  }
-
-  void onPageChanged(int index) {
+  void onPageChange(int index) {
     _currentPageIndex.value = index;
   }
 
   void nextPage() {
-    if (currentPageIndex == onBoardingData.length - 1) {
-      completeOnboarding();
+    if (_currentPageIndex.value == onBoardingData.length - 1) {
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -55,8 +48,8 @@ class OnBoardingController extends GetxController {
     }
   }
 
-  void completeOnboarding() {
+  void completeOnBoarding() {
     final appStartedController = Get.find<AppStartedController>();
-    appStartedController.setFirstTimeDone();
+    appStartedController.setFirtsTimeDone();
   }
 }

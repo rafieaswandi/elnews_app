@@ -1,6 +1,6 @@
-import 'package:elnews_app/controller/on_boarding_controller.dart';
+import 'package:aplication_news/controller/on_boarding_controller.dart';
+import 'package:aplication_news/models/on_boarding_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -13,6 +13,37 @@ class OnBoardingScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          PageView.builder(
+            controller: controller.pageController,
+            onPageChanged: controller.onPageChange,
+            itemCount: controller.onBoardingData.length,
+            itemBuilder: (context, index) {
+              final OnBoardingInfo page = controller.onBoardingData[index];
+              return Container(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(page.image, height: 300),
+                    const SizedBox(height: 48),
+                    Text(
+                      page.title,
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      page.description,
+                      style: Theme.of(context).textTheme.labelLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+
           Positioned(
             bottom: 40,
             left: 40,
@@ -20,39 +51,38 @@ class OnBoardingScreen extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  spacing: 1.0,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     controller.onBoardingData.length,
-                    (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.only(right: 5),
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: controller.currentPageIndex == index
-                            ? Colors.black
-                            : Colors.grey,
-                        shape: BoxShape.circle,
+                    (index) => Obx(
+                      () => Container(
+                        margin: const EdgeInsets.only(right: 5),
+                        height: controller.currentPageIndex == index ? 16 : 8,
+                        width: 8,
+                        decoration: BoxDecoration(
+                          color: controller.currentPageIndex == index
+                              ? Colors.deepPurple
+                              : Colors.grey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 48),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: controller.completeOnboarding,
-                      child: const Text("Skip"),
+                      onPressed: controller.completeOnBoarding,
+                      child: const Text('Skip'),
                     ),
                     IconButton.filled(
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                      ), // Tambahkan parameter icon ini
                       onPressed: controller.nextPage,
                       style: IconButton.styleFrom(
                         padding: const EdgeInsets.all(16),
                       ),
+                      icon: const Icon(Icons.chevron_right),
                     ),
                   ],
                 ),

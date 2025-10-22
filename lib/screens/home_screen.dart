@@ -1,48 +1,37 @@
-import 'package:elnews_app/controller/home_controller.dart';
-import 'package:elnews_app/models/on_boarding_info.dart';
+import 'package:aplication_news/controller/home_controller.dart';
+import 'package:aplication_news/widgets/category_content.dart';
+import 'package:aplication_news/widgets/floating_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final homeController = Get.put(HomeController());
-
-  @override
-s}
-
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late TabController tabBarController;
-  final List<TabInfo> tabs = [
-    TabInfo(title: 'Headlines', category: 'general'),
-    TabInfo(title: 'Business', category: 'business'),
-    TabInfo(title: 'Entertainment', category: 'entertainment'),
-    TabInfo(title: 'Health', category: 'health'),
-    TabInfo(title: 'Science', category: 'science'),
-    TabInfo(title: 'Sports', category: 'sports'),
-    TabInfo(title: 'Technology', category: 'technology'),
-  ];
-
-  @override
-
-  void initState() {
-    tabBarController = TabController(length: tabs.length, vsync: this);
-    super.initState();
-  }
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ElNews'),
+        title: const Text('Newen'),
         centerTitle: true,
         bottom: TabBar(
-          controller: tabBarController,
-          tabs: tabs.map((tab) => Tab(text: tab.title)).toList(),
+          controller: homeController.tabBarController,
+          tabs: homeController.tabs.map((tab) => Tab(text: tab.title)).toList(),
           isScrollable: true,
+          indicatorWeight: 4.0,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
         ),
       ),
-      body: Center(child: Text('Home Screen')),
-      );
+      body: TabBarView(
+        controller: homeController.tabBarController,
+        children: homeController.tabs
+            .map((tab) => CategoryContent(category: tab.category))
+            .toList(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingSearchBar(),
+    );
   }
 }

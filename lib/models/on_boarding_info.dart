@@ -1,6 +1,11 @@
-class TabInfo {
+class OnBoardingInfo {
+  final String image;
   final String title;
-  final String category;
+  final String description;
 
-  TabInfo({required this.title, required this.category});
+  OnBoardingInfo({
+    required this.image,
+    required this.title,
+    required this.description,
+  });
 }

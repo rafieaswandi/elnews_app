@@ -1,3 +1,4 @@
+import 'package:aplication_news/models/news_models.dart';
 import 'package:aplication_news/screens/bookmark_screen.dart';
 import 'package:aplication_news/screens/home_screen.dart';
 import 'package:aplication_news/screens/news_screen.dart';
@@ -8,35 +9,34 @@ import 'package:get/get.dart';
 
 class AppRouter {
   static const String home = '/';
-  static const String onBoarding = '/onboarding';
+  static const String onBoarding = '/onBoarding';
   static const String news = '/news';
   static const String search = '/search';
   static const String bookmark = '/bookmark';
 
-  // GetX pages
-  static final List<GetPage> routes = [
+  static List<GetPage<dynamic>> routes = [
     GetPage(name: home, page: () => HomeScreen()),
     GetPage(name: onBoarding, page: () => OnBoardingScreen()),
     GetPage(
       name: news,
       page: () {
-        final String title = Get.arguments ?? "No Title";
-        return NewsScreen(title: title, article: Get.arguments);
+        final Article article = Get.arguments as Article;
+        return NewsScreen(article: article, title: '',);
       },
     ),
     GetPage(name: search, page: () => SearchScreen()),
     GetPage(name: bookmark, page: () => BookmarkScreen()),
   ];
 
-  // Unknown route
-  static Route<dynamic>? unknownRoute(RouteSettings settings) {
+  // unknown routes
+  static Route<dynamic> unknownRoute(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: Text('No route defined for ${settings.name}'),
-        ),
-      ),
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Center(child: Text('No route defined for ${settings.name}')),
+        );
+      },
     );
   }
 }

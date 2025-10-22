@@ -1,73 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
-  // Color palette
-  static const Color primaryColor = Color(0xFF978228);
-  static const Color secondaryColor = Color(0xFFC5C4B9);
-  static const Color darkBackground = Color(0xFF151515);
-  static const Color lightBackground = Color(0xFFFDFDFD);
+  static final ThemeData lightTheme = ThemeData.light().copyWith(
+    primaryColor: Colors.redAccent,
+    scaffoldBackgroundColor: Colors.grey[50],
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 1,
+      iconTheme: const IconThemeData(color: Colors.black87),
+      titleTextStyle: GoogleFonts.poppins(
+        color: Colors.black87,
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
+      ),
+    ),
+    cardColor: Colors.white,
+    dividerColor: Colors.grey[300],
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Colors.redAccent,
+      foregroundColor: Colors.white,
+    ),
+    textTheme: GoogleFonts.poppinsTextTheme(
+      ThemeData.light().textTheme,
+    ).copyWith(
+      headlineSmall: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: Colors.black87,
+      ),
+      bodyLarge: const TextStyle(
+        fontSize: 16,
+        color: Colors.black87,
+        height: 1.5,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14,
+        color: Colors.grey[800],
+      ),
+    ),
+  );
 
-  // DARK THEME
-  static ThemeData get darkTheme {
-    return ThemeData(
-      brightness: Brightness.dark,
-      fontFamily: "JMH Beda", // 👈 Apply font
-      primaryColor: primaryColor,
-      scaffoldBackgroundColor: darkBackground,
-      colorScheme: const ColorScheme.dark(
-        primary: primaryColor,
-        secondary: secondaryColor,
-        background: darkBackground,
+  static final ThemeData darkTheme = ThemeData.dark().copyWith(
+    primaryColor: Colors.redAccent,
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color(0xFF1F1F1F),
+      elevation: 0,
+      iconTheme: const IconThemeData(color: Colors.white),
+      titleTextStyle: GoogleFonts.poppins(
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: darkBackground,
-        elevation: 0,
-        iconTheme: IconThemeData(color: secondaryColor),
-        titleTextStyle: TextStyle(
-          fontFamily: "JMH Beda",
-          color: secondaryColor,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+    ),
+    cardColor: const Color(0xFF1F1F1F),
+    dividerColor: Colors.grey[700],
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Colors.redAccent,
+      foregroundColor: Colors.white,
+    ),
+    textTheme: GoogleFonts.poppinsTextTheme(
+      ThemeData.dark().textTheme,
+    ).copyWith(
+      headlineSmall: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: Colors.white,
       ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontFamily: "JMH Beda", color: secondaryColor, fontSize: 16),
-        bodyMedium: TextStyle(fontFamily: "JMH Beda", color: secondaryColor, fontSize: 14),
-        bodySmall: TextStyle(fontFamily: "JMH Beda", color: secondaryColor, fontSize: 12),
-        titleLarge: TextStyle(fontFamily: "JMH Beda", color: primaryColor, fontWeight: FontWeight.bold, fontSize: 22),
+      bodyLarge: const TextStyle(
+        fontSize: 16,
+        color: Colors.white70,
+        height: 1.5,
       ),
-    );
-  }
-
-  // LIGHT THEME
-  static ThemeData get lightTheme {
-    return ThemeData(
-      brightness: Brightness.light,
-      fontFamily: "JMH Beda", // 👈 Apply font
-      primaryColor: primaryColor,
-      scaffoldBackgroundColor: lightBackground,
-      colorScheme: const ColorScheme.light(
-        primary: primaryColor,
-        secondary: secondaryColor,
-        background: lightBackground,
+      bodyMedium: TextStyle(
+        fontSize: 14,
+        color: Colors.grey[400],
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: lightBackground,
-        elevation: 0,
-        iconTheme: IconThemeData(color: darkBackground),
-        titleTextStyle: TextStyle(
-          fontFamily: "JMH Beda",
-          color: darkBackground,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontFamily: "JMH Beda", color: darkBackground, fontSize: 16),
-        bodyMedium: TextStyle(fontFamily: "JMH Beda", color: darkBackground, fontSize: 14),
-        bodySmall: TextStyle(fontFamily: "JMH Beda", color: darkBackground, fontSize: 12),
-        titleLarge: TextStyle(fontFamily: "JMH Beda", color: primaryColor, fontWeight: FontWeight.bold, fontSize: 22),
-      ),
-    );
-  }
+    ),
+  );
 }

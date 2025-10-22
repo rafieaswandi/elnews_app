@@ -1,11 +1,11 @@
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:aplication_news/core/routes.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class AppStartedController extends  {
-  final box = GetStorage();
+class AppStartedController extends GetxController {
+  final _box = GetStorage();
   final RxBool _isFirstTime = true.obs;
-  final String _key = 'isFirstTime';
+  final String _key = 'isFisrtTime';
 
   bool get isFirstTime => _isFirstTime.value;
 
@@ -22,9 +22,14 @@ class AppStartedController extends  {
   }
 
   @override
-
   void onInit() {
     super.onInit();
     _loadInitials();
+  }
+
+  void setFirtsTimeDone() {
+    _isFirstTime.value = false;
+    _box.write(_key, false);
+    Get.offNamed(AppRouter.home);
   }
 }

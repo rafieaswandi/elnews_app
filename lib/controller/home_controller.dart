@@ -1,15 +1,16 @@
-import 'package:elnews_app/models/on_boarding_info.dart';
+import 'package:aplication_news/models/tab_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController
+  with GetSingleTickerProviderStateMixin {
   final List<TabInfo> tabs = [
+    TabInfo(title: 'Headlines', category: 'General'),
     TabInfo(title: 'Business', category: 'business'),
     TabInfo(title: 'Entertainment', category: 'entertainment'),
-    TabInfo(title: 'Headlines', category: 'general'),
     TabInfo(title: 'Health', category: 'health'),
     TabInfo(title: 'Science', category: 'science'),
-    TabInfo(title: 'Sports', category: 'sports'),
+    TabInfo(title: 'Sport', category: 'sport'),
     TabInfo(title: 'Technology', category: 'technology'),
   ];
 
@@ -17,7 +18,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    tabBarController = TabController(length: tabs.length, vsync: ScrollableState());
+    tabBarController = TabController(length: tabs.length, vsync: this);
     super.onInit();
   }
 
