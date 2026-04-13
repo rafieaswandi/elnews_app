@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Newen'),
+        title: const Text('ElNews'),
         centerTitle: true,
         bottom: TabBar(
           controller: homeController.tabBarController,
